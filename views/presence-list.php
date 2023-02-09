@@ -7,11 +7,14 @@ if (isset($_POST['filterButton'])) {
     $students = array_filter($list, function($student) use ($presencesRequired) {
         return $student['TimesPresent'] >= $presencesRequired;
     });
-    $list =$students;
+    $list=$students;
 }
+//if(isset($_POST['removeFilter'])){
+//    $presencesRequired = 0;
+//}
 if(isset($_POST['export'])) {
     $delimiter=";";
-    $presencesRequired = $_POST['presencesRequired'];
+    $minPresenceRequired = $_POST['presencesRequired'];
     $filename = 'presenceList.csv';
     $header_args =array("Име","Фак.Номер","Брой присъствие");
     header("Content-type: text/csv; charset=utf-8");
@@ -20,7 +23,7 @@ if(isset($_POST['export'])) {
     ob_end_clean();
     fputcsv($fp, $header_args);
     foreach ($list as $fields) {
-        if($fields['TimesPresent'] >= $presencesRequired){
+        if($fields['TimesPresent'] >= $minPresenceRequired){
             fputcsv($fp, $fields);
         }
     }
@@ -35,15 +38,13 @@ if(isset($_POST['export'])) {
         </a>
         Присъствен списък
     </h1>
-    <form class="form-inline" method="post">
-        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>"/>
-        <input type="hidden" name="presencesRequired" value="<?= $presencesRequired ?>"/>
-        <input class="button is-red-link" type="submit" name="export"  value="Експорт"/>
-    </form >
     <form class="form-inline" action="" method="post" enctype="multipart/form-data">
         <input class="input is-link" id="presences" type="number" name="presences" min=0 placeholder="Минимален брой присъствия" value="<?= $_POST['presences'] ?? 2 ?>">
         <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>"/>
         <input class="button is-link" type="submit" value="Филтриране" name="filterButton"/>
+        <input class="button red is-link" type="submit" value="Изчистване на Филтър" name="removeFilter"/>
+        <input type="hidden" name="presencesRequired" value="<?= $presencesRequired ?>"/>
+        <input class="button is-link green" type="submit" name="export"  value="Експорт"/>
     </form>
 
 </section>

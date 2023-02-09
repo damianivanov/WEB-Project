@@ -33,6 +33,9 @@ if (isset($_POST['filter'])) {
 
         $filtered = true;
 }
+if(isset($_POST['removeFilter'])){
+    $filtered = false;
+}
 if(isset($_POST['export'])) {
     $delimiter=";";
     $fp = fopen("php://output", 'w');
@@ -97,7 +100,9 @@ if(isset($_POST['export'])) {
     </select>
     <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>"/>
     <input class="button is-link" type="submit" value="Филтриране" name="filter"/>
-    <input class="button is-red-link" type="submit" value="Изчистване на Филтър" name="removeFilter"/>
+    <input class="button is-link red" type="submit" value="Изчистване на Филтър" name="removeFilter"/>
+    <input type="hidden" name="filteredDate" value="<?= $filterDate ?? "" ?>"/>
+    <input class="button is-link green" type="submit" name="export"  value="Експорт"/>
 </form>
 
 <?php if (count($timeTableData) != 0) {
@@ -197,11 +202,10 @@ $start = hrtime(true); ?>
     </table>
 </div>
 
-    <form class="form-inline" method="post">
-        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>"/>
-        <input type="hidden" name="filteredDate" value="<?= $filterDate ?? "" ?>"/>
-        <input class="button is-red-link" type="submit" name="export"  value="Експорт"/>
-    </form >
+<!--    <form class="form-inline" method="post">-->
+<!--        <input type="hidden" name="csrf_token" value="--><?//= $_SESSION['csrf_token'] ?><!--"/>-->
+<!---->
+<!--    </form >-->
 <?php
 //$end = hrtime(true);
 //$s = ($end - $start) / 1000000000;

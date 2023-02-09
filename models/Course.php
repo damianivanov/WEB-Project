@@ -59,10 +59,10 @@ class Course {
         $sql = "select p.name as PaperName,
        s.name,
        s.faculty_number,
-       cast(t.from_time_planned as TIME)                                                   as from_Planed,
-       cast(t.to_time_planned as TIME)                                                     as to_Planed,
-       cast(t.from_time_real as TIME)                                                      as from_Real,
-       cast(t.to_time_real as TIME)                                                        as to_Real,
+       DATE_FORMAT(t.from_time_planned ,'%H:%i')  as from_Planed,
+       DATE_FORMAT(t.to_time_planned,'%H:%i')                                                     as to_Planed,
+       DATE_FORMAT(t.from_time_real,'%H:%i')                                                      as from_Real,
+       DATE_FORMAT(t.to_time_real,'%H:%i')                                                        as to_Real,
        TIMESTAMPDIFF(minute, cast(t.from_time_real as Time), cast(t.to_time_real as Time)) AS duration
 from time_tables as t
          join papers p on t.paper_id = p.id
