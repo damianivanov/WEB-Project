@@ -26,7 +26,7 @@ if (isset($_POST['add-course'])) {
 
     $course = new Course($name, $year, $_SESSION['id']);
 
-    if ($course->hasDuplwicate()) {
+    if ($course->hasDuplicate()) {
         throw new DuplicateItemError();
     }
 
