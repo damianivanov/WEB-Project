@@ -1,0 +1,136 @@
+[
+    {
+        "path": "/",
+        "view": "welcome",
+        "meta": {
+            "title": ""
+        }
+    },
+    {
+        "path": "/login",
+        "view": "login",
+        "meta": {
+            "auth": "prevent",
+            "title": "Login"
+        }
+    },
+    {
+        "path": "/register",
+        "view": "register",
+        "meta": {
+            "auth": "prevent",
+            "title": "Register"
+        }
+    },
+    {
+        "path": "/logout",
+        "view": "logout",
+        "meta": {
+            "auth": "required",
+            "title": "Logout"
+        }
+    },
+    {
+        "path": "/dashboard",
+        "view": "dashboard",
+        "meta": {
+            "auth": "required",
+            "title": "Dashboard",
+            "css": [
+                "/assets/css/dashboard.css"
+            ]
+        }
+    },
+    {
+        "path": "/results",
+        "view": "results",
+        "meta": {
+            "auth": "required",
+            "title": "Results"
+        }
+    },
+    {
+        "path": "/add-course",
+        "view": "add-course",
+        "meta": {
+            "auth": "required",
+            "title": "Add Course"
+        }
+    },
+    {
+        "path": "/course/:id",
+        "view": "course",
+        "meta": {
+            "auth": "required",
+            "title": "View Course",
+            "css": [
+                "/assets/css/course.css"
+            ]
+        }
+    },
+    {
+        "path": "/course/:id/import-bbb",
+        "view": "import-bbb",
+        "meta": {
+            "auth": "required",
+            "title": "Import from Big Blue Button",
+            "css": [
+                "/assets/css/import-bbb.css"
+            ]
+        }
+    },
+    {
+        "path": "/course/:id/import-plan",
+        "view": "import-plan",
+        "meta": {
+            "auth": "required",
+            "title": "Import plan from Google Sheets",
+            "css": [
+                "/assets/css/import-plan.css"
+            ]
+        }
+    },
+    {
+        "path": "/course/:id/import-real",
+        "view": "import-real",
+        "meta": {
+            "auth": "required",
+            "title": "Import real plan from Google Sheets",
+            "css": [
+                "/assets/css/import-real.css"
+            ]
+        }
+    },
+    {
+        "path": "/404",
+        "view": "404",
+        "meta": {
+            "title": "Page Not Found"
+        }
+    },
+    {
+        "path": "/csrf",
+        "view": "csrf",
+        "meta": {
+            "title": "Invalid CSRF"
+        }
+    },
+    {
+        "path": "/invalid-course",
+        "view": "invalid-course",
+        "meta": {
+            "title": "Invalid Course"
+        }
+    },
+    {
+        "path": "/course/:id/presence-list",
+        "view": "presence-list",
+        "meta": {
+            "auth": "required",
+            "title": "Show Presence List",
+            "css": [
+                "/assets/css/presence-list.css"
+            ]
+        }
+    }
+]

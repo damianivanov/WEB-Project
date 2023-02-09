@@ -1,0 +1,14 @@
+form, input, textarea {
+    display: block;
+}
+input[type="submit"] {
+    margin: 10px 0;
+}
+
+.large {
+    min-height: 20em !important;
+}
+
+.small {
+    min-height: 10px !important;
+}

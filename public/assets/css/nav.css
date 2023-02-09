@@ -1,0 +1,52 @@
+.nav {
+    height: 50px;
+    margin: 0 0 50px 0;
+    padding: 10px;
+    background-color: #ffc692;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    height: 100%;
+}
+
+.left {
+    justify-self: flex-start;
+    align-self: center;
+}
+
+.left h1 {
+    margin: 0;
+}
+
+.right {
+    justify-self: flex-end;
+    align-self: center;
+}
+
+.right a {
+    text-decoration: none;
+    padding-left: 20px;
+    color: black;
+}
+
+.right a:hover {
+}
+
+.no-decoration {
+    text-decoration: none;
+    color: black;
+    font-size: 35px;
+}
+
+.title:hover, .link:hover {
+    color: #4d4d4d;
+}
+
+.link {
+    margin-left: 8px;
+}
+

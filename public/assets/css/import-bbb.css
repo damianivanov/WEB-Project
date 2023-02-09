@@ -1,0 +1,31 @@
+/*
+|--------------------------------------------------------------------------
+| Import BBB CSS
+|--------------------------------------------------------------------------
+|
+| This file contains the css code that is used by import-bbb view
+| (/views/import-bbb.php).
+|
+*/
+
+.red {
+    color: #D32F2F;
+}
+
+form, input {
+    display: block;
+}
+
+label {
+    display: flex;
+}
+
+input[type^="checkbox"] {
+    margin: 10px 0;
+}
+
+label p {
+    margin-left: 5px;
+}
+
+

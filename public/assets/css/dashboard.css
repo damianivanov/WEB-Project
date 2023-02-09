@@ -1,0 +1,30 @@
+.list {
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+.list li {
+    margin: 10px;
+}
+
+ul li:before {
+    content: "📙 ";
+    position: relative;
+    top: 4px;
+    left: -5px;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    font-size: 18pt;
+}
+
+.list li a {
+    text-decoration: none;
+    color: #485fc7;
+}
+
+.list li a:hover {
+    color: #6f86e8;
+}
+
+
