@@ -14,9 +14,11 @@
     overflow-x: scroll;
     margin: 30px auto;
 }
-table{
+
+table {
     width: 100%;
 }
+
 table, tr, td {
     /*width: 100%;*/
     border: solid 1px black;
@@ -74,10 +76,12 @@ tr, td {
     justify-content: center;
     flex-direction: row;
 }
+
 .select {
     width: 50%;
     margin: 20px;
 }
+
 .presence {
     width: 5px;
 }

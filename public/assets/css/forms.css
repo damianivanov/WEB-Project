@@ -1,5 +1,5 @@
 .input, .textarea {
-    box-shadow: inset 0 .0625em .125em rgba(10,10,10,.05);
+    box-shadow: inset 0 .0625em .125em rgba(10, 10, 10, .05);
     max-width: 100%;
     width: 100%;
 }
@@ -10,9 +10,12 @@
     border-radius: .375em;
     color: #363636 !important;
 }
-form label{font-weight: bold;}
 
-form{
+form label {
+    font-weight: bold;
+}
+
+form {
     padding-top: 20px;
     margin: auto;
     width: 50%;
@@ -57,6 +60,7 @@ h2.FormTitle {
 form, input, textarea, select {
     display: block;
 }
+
 input[type="submit"] {
     margin: 10px 0;
 }

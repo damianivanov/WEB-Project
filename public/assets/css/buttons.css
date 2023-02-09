@@ -35,18 +35,15 @@
     color: #fff;
     margin: 5px;
 }
-.red{
+
+.red {
     background-color: #D32F2F !important;
 }
+
 .green {
     background-color: green !important;
 }
-/*.button.is-link {*/
-/*    background-color: #D32F2F;*/
-/*    border-color: transparent;*/
-/*    width: 30%;*/
-/*    color: #fff;*/
-/*}*/
+
 
 .button.is-link:hover {
     background-color: #3e56c4;

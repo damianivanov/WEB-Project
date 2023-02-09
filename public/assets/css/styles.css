@@ -7,7 +7,6 @@
 |
 */
 
-
 @import "fonts.css";
 @import "nav.css";
 @import "buttons.css";
@@ -194,13 +193,17 @@ form .button {
 }
 
 @keyframes disappear {
-    from {opacity: 100%;}
-    to {opacity: 0;}
+    from {
+        opacity: 100%;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 
 .fade-out {
-    animation-name:disappear ;
+    animation-name: disappear;
     animation-duration: 2s;
     animation-delay: 4s;
     animation-fill-mode: forwards;

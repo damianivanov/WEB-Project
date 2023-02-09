@@ -2,9 +2,8 @@
     <h2 class="FormTitle">Вход</h2>
 
     <form action="login" method="post">
-<!--        <label for="email">Електронна поща</label>-->
-        <input class="input is-link" id="email" type="email" name="email" placeholder="Електронна поща" value="<?= $_POST['email'] ?? null ?>"/>
-<!--        <label for="pass">Парола</label>-->
+        <input class="input is-link" id="email" type="email" name="email" placeholder="Електронна поща"
+               value="<?= $_POST['email'] ?? null ?>"/>
         <input class="input is-link" id="pass" type="password" placeholder="Парола" name="password"/>
         <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? null ?>"/>
         <input class="button is-link" type="submit" name="login" value="Вход"/>

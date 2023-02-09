@@ -3,11 +3,10 @@
     <p class="text-center">Система за отбелязване на присъствията на студентите.</p>
     <section class="box-center">
         <?php
-        if(Router::isLoggedIn()){
+        if (Router::isLoggedIn()) {
             //TODO:landing page
             header("Location: /dashboard");
-        }
-        else{
+        } else {
             header("Location: /login");
         }
         ?>
