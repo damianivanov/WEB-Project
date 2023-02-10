@@ -36,15 +36,15 @@ tr, td {
     padding: 0 2px;
 }
 
-.end {
+.e {
     border-right: 3px solid black;
 }
 
-.start {
+.s {
     border-left: 3px solid black;
 }
 
-.mid {
+.m {
     border-top: 3px solid black;
     border-bottom: 3px solid black;
 }
@@ -82,15 +82,15 @@ tr, td {
     margin: 20px;
 }
 
-.presence {
+.p {
     width: 5px;
 }
 
-.green {
+.g {
     background-color: mediumseagreen !important;
 }
 
-.red {
+.r {
     background-color: indianred;
 }
 

@@ -1,5 +1,5 @@
 <?php
-//TODO:"html/links/2-3 reda testovi danni/documentation/view page source spaces"
+//TODO: links/2-3 reda testovi danni/documentation/url parameter filter
 $courseID = Router::$ROUTE['URL_PARAMS']['id'];
 $data = Course::getById($courseID);
 $teacher_id = $data['teacher_id'];
@@ -118,9 +118,8 @@ if (isset($_POST['export'])) {
                     $end_time = $date_time['end_time'];
                     $cellCount = TimeTable::hoursToMinutes($start_time, $end_time);
                     ?>
-                    <td class="time <?php if ($date_time != end($date_times)) {
-                        echo 'end';
-                    } ?>" colspan="<?= $cellCount ?>"><?= $date_time['date'] ?></td>
+                    <td class="time <?php if ($date_time != end($date_times)) {echo 'e';}?>"
+                        colspan="<?= $cellCount ?>"> <?= $date_time['date'] ?></td>
                 <?php }
                 ?>
             </tr>
@@ -133,9 +132,8 @@ if (isset($_POST['export'])) {
 
                     for ($i = 0; $i < $cellCount; $i += 15) {
                         ?>
-                        <td class="time <?php if ($i + $cellCount % 15 == $cellCount) {
-                            echo 'end';
-                        } ?>" colspan="<?= $i + $cellCount % 15 == $cellCount ? $cellCount % 15 : 15 ?>">
+                        <td class="time <?php if ($i + $cellCount % 15 == $cellCount) {echo 'e';} ?>"
+                            colspan="<?= $i + $cellCount % 15 == $cellCount ? $cellCount % 15 : 15 ?>">
                             <?= TimeTable::addTime($start_time, $i) . ' - ' . (($i + $cellCount % 15 == $cellCount) ?
                                 substr($end_time, 0, -3) :
                                 TimeTable::addTime($start_time, $i + 15)) ?>
@@ -153,18 +151,14 @@ if (isset($_POST['export'])) {
                     <tr>
                         <td class="header" title="<?= $student['name'] ?>">
                             <div class="hide-long-text">
-                        <span>
-                            <?= $student['name'] ?>
-                        </span>
+                        <span><?= $student['name'] ?></span>
                             </div>
                         </td>
                         <td class="header1"><?= $student['faculty_number'] ?></td>
                         <td class="header2"
                             title="<?= (!$filtered) || (in_array($student['student_id'], $presenters_today)) ? $student['topic'] : "" ?>">
                             <div class="hide-long-text">
-                        <span>
-                            <?= (!$filtered) || in_array($student['student_id'], $presenters_today) ? $student['topic'] : "" ?>
-                        </span>
+                                <span><?= (!$filtered) || in_array($student['student_id'], $presenters_today) ? $student['topic'] : "" ?></span>
                             </div>
                         </td>
                         <?php
@@ -180,15 +174,7 @@ if (isset($_POST['export'])) {
                             for ($j = 0; $j < $cellCount; ++$j) {
                                 $currTime = TimeTable::addTime($start_time, $j);
                                 ?>
-                                <td class="<?=TimeTable::isPlanned($currTime, $parsedTimes[0], $parsedTimes[1], true, $date_time['date']) ?>
-                                       <?= TimeTable::isPlanned($currTime, $parsedTimes[2], $parsedTimes[3], false, $date_time['date']) ?>
-                                       <?= TimeTable::isMid($currTime, $parsedTimes[0], $parsedTimes[1], $parsedTimes[3], $date_time['date'], 'mid') ?>
-                                       <?= TimeTable::isMid($currTime, $parsedTimes[4], $parsedTimes[5], $parsedTimes[6], $date_time['date'], 'green') ?>
-                                       <?= TimeTable::determinePresence($currTime, $presences, $student['student_id']) ?>
-                                       <?= TimeTable::isLast($currTime, $end_time, $date_time, $date_times) ?>
-                            title="<?= $currTime ?>">
-                                <div class="presence"></div>
-                                </td>
+                                <td class="<?= TimeTable::isPlanned($currTime, $parsedTimes[0], $parsedTimes[1], true, $date_time['date']) ?> <?= TimeTable::isPlanned($currTime, $parsedTimes[2], $parsedTimes[3], false, $date_time['date']) ?> <?= TimeTable::isMid($currTime, $parsedTimes[0], $parsedTimes[1], $parsedTimes[3], $date_time['date'], 'm') ?> <?= TimeTable::isMid($currTime, $parsedTimes[4], $parsedTimes[5], $parsedTimes[6], $date_time['date'], 'g') ?> <?= TimeTable::determinePresence($currTime, $presences, $student['student_id']) ?> <?= TimeTable::isLast($currTime, $end_time, $date_time, $date_times) ?>" title="<?= $currTime ?>"><div class="p"></div></td>
                                 <?php
                             }
 

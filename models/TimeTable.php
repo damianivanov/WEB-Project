@@ -209,9 +209,9 @@ where course_id=(?) and DATE(from_time_planned)=(?)";
     {
         if (TimeTable::searchByKey($currTime, $presences)) {    // check if current time is in presences
             if (TimeTable::searchByValue($student_id, $presences[$currTime])) {  // student was present ?
-                return 'green';
+                return 'g';
             } else {
-                return 'red';
+                return 'r';
             }
         }
         return '';
@@ -222,7 +222,7 @@ where course_id=(?) and DATE(from_time_planned)=(?)";
         $endTimeHour = substr($endTime, 0, -3);
         $lastTimeOfLesson = TimeTable::addTime($currTime, 1);
         if ($lastTimeOfLesson == $endTimeHour && $dateTime != end($dateTimes)) {
-            return 'end';
+            return 'e';
         }
 
         return '';
@@ -232,16 +232,16 @@ where course_id=(?) and DATE(from_time_planned)=(?)";
     {
 //        $plannedDate = substr($fromTimePlanned, 0, 10);
         if ($fromTimePlanned != $currDate) {
-            return '';
+            return "";
         }
 
 //        $fromTimePlannedHourMin = substr($fromTimePlanned, 11, 5);
 
         if ($currTime == $fromTimePlannedHourMin) {
-            return $isFrom ? 'start' : 'end';
+            return $isFrom ? "s" : "e";
         }
 
-        return '';
+        return "";
     }
 
     public static function isMid($currTime, $fromTimePlanned, $fromTimePlannedHourMin,$toTimePlannedHourMin, $currDate, $class): string
