@@ -1,4 +1,5 @@
 <?php
+//TODO:"html/links/2-3 reda testovi danni/documentation/view page source spaces"
 $courseID = Router::$ROUTE['URL_PARAMS']['id'];
 $data = Course::getById($courseID);
 $teacher_id = $data['teacher_id'];
@@ -37,7 +38,6 @@ if (isset($_POST['removeFilter'])) {
     $filtered = false;
 }
 if (isset($_POST['export'])) {
-    $delimiter = ";";
     $fp = fopen("php://output", 'w');
     $header_args = array("Тема", 'Име', "Фак.Номер", "Планирано започване", 'Планиран край', 'Реално започване', 'Реален край', 'Продължителност');
     $filteredDate = $_POST['filteredDate'];
@@ -99,9 +99,9 @@ if (isset($_POST['export'])) {
     </select>
     <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>"/>
     <input class="button is-link" type="submit" value="Филтриране" name="filter"/>
-    <input class="button is-link red" type="submit" value="Изчистване на Филтър" name="removeFilter"/>
+    <input class="button is-link red-btn" type="submit" value="Изчистване на Филтър" name="removeFilter"/>
     <input type="hidden" name="filteredDate" value="<?= $filterDate ?? "" ?>"/>
-    <input class="button is-link green" type="submit" name="export" value="Експорт"/>
+    <input class="button is-link green-btn" type="submit" name="export" value="Експорт"/>
 </form>
 
 <?php if (count($timeTableData) != 0) {
@@ -180,7 +180,7 @@ if (isset($_POST['export'])) {
                             for ($j = 0; $j < $cellCount; ++$j) {
                                 $currTime = TimeTable::addTime($start_time, $j);
                                 ?>
-                                <td class="<?= TimeTable::isPlanned($currTime, $parsedTimes[0], $parsedTimes[1], true, $date_time['date']) ?>
+                                <td class="<?=TimeTable::isPlanned($currTime, $parsedTimes[0], $parsedTimes[1], true, $date_time['date']) ?>
                                        <?= TimeTable::isPlanned($currTime, $parsedTimes[2], $parsedTimes[3], false, $date_time['date']) ?>
                                        <?= TimeTable::isMid($currTime, $parsedTimes[0], $parsedTimes[1], $parsedTimes[3], $date_time['date'], 'mid') ?>
                                        <?= TimeTable::isMid($currTime, $parsedTimes[4], $parsedTimes[5], $parsedTimes[6], $date_time['date'], 'green') ?>

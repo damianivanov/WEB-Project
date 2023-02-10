@@ -36,17 +36,22 @@
     margin: 5px;
 }
 
-.red {
+.red-btn {
     background-color: #D32F2F !important;
 }
-
-.green {
+.red-btn:hover {
+    background-color: #ce6c6c !important;
+}
+.green-btn {
     background-color: green !important;
+}
+.green-btn:hover {
+    background-color: #2f842f !important;
 }
 
 
 .button.is-link:hover {
-    background-color: #3e56c4;
+    background-color: #7586d5;
     border-color: transparent;
     color: #fff;
 }

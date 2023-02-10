@@ -9,14 +9,10 @@ if (isset($_POST['filterButton'])) {
     });
     $list = $students;
 }
-//if(isset($_POST['removeFilter'])){
-//    $presencesRequired = 0;
-//}
 if (isset($_POST['export'])) {
-    $delimiter = ";";
     $minPresenceRequired = $_POST['presencesRequired'];
     $filename = 'presenceList.csv';
-    $header_args = array("Име", "Фак.Номер", "Брой присъствие");
+    $header_args = array("Име", "Фак.Номер", "Брой присъствия");
     header("Content-type: text/csv; charset=utf-8");
     header("Content-Disposition: attachment; filename=$filename");
     $fp = fopen("php://output", 'w');
@@ -43,9 +39,9 @@ if (isset($_POST['export'])) {
                placeholder="Минимален брой присъствия" value="<?= $_POST['presences'] ?? 2 ?>">
         <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>"/>
         <input class="button is-link" type="submit" value="Филтриране" name="filterButton"/>
-        <input class="button red is-link" type="submit" value="Изчистване на Филтър" name="removeFilter"/>
+        <input class="button red-btn is-link" type="submit" value="Изчистване на Филтър" name="removeFilter"/>
         <input type="hidden" name="presencesRequired" value="<?= $presencesRequired ?>"/>
-        <input class="button is-link green" type="submit" name="export" value="Експорт"/>
+        <input class="button is-link green-btn" type="submit" name="export" value="Експорт"/>
     </form>
 
 </section>
