@@ -78,7 +78,6 @@ tr, td {
 }
 
 .select {
-    width: 50%;
     margin: 20px;
 }
 
@@ -87,11 +86,11 @@ tr, td {
 }
 
 .g {
-    background-color: mediumseagreen !important;
+    background-color: var(--table-green) !important;
 }
 
 .r {
-    background-color: indianred;
+    background-color: var(--tabble-red) !important;
 }
 
 .border {

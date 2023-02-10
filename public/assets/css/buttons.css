@@ -30,20 +30,20 @@
 }
 
 .button.is-link {
-    background-color: #485fc7;
+    background-color: var(--button-blue);
     border-color: transparent;
     color: #fff;
     margin: 5px;
 }
 
 .red-btn {
-    background-color: #D32F2F !important;
+    background-color: var(--button-red) !important;
 }
 .red-btn:hover {
     background-color: #ce6c6c !important;
 }
 .green-btn {
-    background-color: green !important;
+    background-color: var(--button-green) !important;
 }
 .green-btn:hover {
     background-color: #2f842f !important;
@@ -57,7 +57,7 @@
 }
 
 .add-button {
-    background-color: #485fc7;
+    background-color: var(--button-blue);
     color: #fff;
     float: right;
     position: relative;

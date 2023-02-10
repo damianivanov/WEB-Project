@@ -1,3 +1,11 @@
+:root {
+    --button-red: #D32F2F;
+    --button-green: green;
+    --button-blue: #485fc7;
+    --table-green: mediumseagreen;
+    --tabble-red: indianred;
+}
+
 .nav {
     height: 50px;
     margin: 0 0 50px 0;

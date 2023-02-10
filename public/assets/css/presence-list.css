@@ -5,12 +5,12 @@
 }
 
 tr.greenRow {
-    background-color: mediumseagreen;
+    background-color: var(--table-green);
     color: white;
 }
 
 tr.redRow {
-    background-color: indianred;
+    background-color: var(--tabble-red);
     color: white;
 }
 

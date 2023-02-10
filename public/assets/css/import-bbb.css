@@ -28,4 +28,7 @@ label p {
     margin-left: 5px;
 }
 
+.float-left{
+    float: left !important;
+}
 

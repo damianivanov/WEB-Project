@@ -1,3 +1,8 @@
+<?php
+$initialRealData = "0	09:00	09:05	9999	0	Милен Петров	0	Откриване на презентациите
+2	09:20	09:25	82057	3	Дамян Иванов	10	Работа със сесии и cookies (от страна насървъра и клиента).";
+$initialConfiguration='{"field_delimiter":"\t", "line_delimiter":"\n", "skip_header_rows":"0", "validate":"true"}';
+?>
 <section class="mini-container data-section">
     <h1>
         <a class="icon-back is-link" href="<?= '/course/' . Router::$ROUTE['URL_PARAMS']['id'] ?>"><i
@@ -19,12 +24,11 @@
     </select>
     <label>
         Реален план (копиран от Google Spreadsheets)
-        <textarea class="textarea large is-link" name="plan" required><?= $_POST['plan'] ?? "" ?></textarea>
+        <textarea class="textarea large is-link" name="plan" required><?= $_POST['plan'] ?? $initialRealData ?></textarea>
     </label>
     <label>
         Конфигурационни данни
-        <textarea class="textarea small is-link" name="configuration"
-                  placeholder="{&quot;field_delimiter&quot;:&quot;\t&quot;, &quot;line_delimiter&quot;:&quot;\n&quot;, &quot;skip_header-rows&quot;:&quot;3&quot;, &quot;validate&quot;:&quot;true&quot;}"><<?= $_POST['configuration'] ?? "" ?>/textarea>
+        <textarea class="textarea small is-link" name="configuration"><?= $_POST['configuration'] ?? $initialConfiguration ?></textarea>
     </label>
     <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>"/>
     <input class="button is-link" type="submit" value="Импортиране" name="import"/>

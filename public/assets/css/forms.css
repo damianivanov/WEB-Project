@@ -34,7 +34,7 @@ form {
     cursor: pointer;
     display: block;
     font-size: 1em;
-    max-width: 100%;
+    max-width:30%;
     outline: 0;
     background-color: #fff;
     border-color: #dbdbdb;
@@ -54,7 +54,7 @@ h2.FormTitle {
 }
 
 .small {
-    min-height: 5em !important;
+    min-height: 8em !important;
 }
 
 form, input, textarea, select {

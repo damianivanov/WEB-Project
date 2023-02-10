@@ -29,6 +29,15 @@ if (isset($_POST["importDup"])) {
 
     header("Location: /course/" . $courseID);
 }
+if(isset($_POST['download'])){
+    $file_url = '../test-data/bbb-sampleData.txt';
+    header('Content-Type: application/octet-stream');
+    header("Content-Transfer-Encoding: utf-8");
+    header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");
+    ob_end_clean();
+    exit(file_get_contents($file_url));
+    readfile($file_url);
+}
 ?>
 
     <section id="basic-form" class="mini-container data-section">
@@ -38,7 +47,9 @@ if (isset($_POST["importDup"])) {
             </a>
             Импортиране на присъствен списък
         </h1>
+
         <form action="import-bbb" method="post" enctype="multipart/form-data">
+
             <div id="file-js-example" class="file has-name">
                 <label class="file-label">
                     <input class="file-input" type="file" name="presence_list">
@@ -55,14 +66,22 @@ if (isset($_POST["importDup"])) {
                 Не е избран файл
             </span>
                 </label>
+
             </div>
+
             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>"/>
             <label>
                 <input type="checkbox" name="confirm" value="true"/>
                 <p>Ако списъкът вече е импортиран, искате ли да го качите отново?</p>
             </label>
+
             <input class="button is-link" type="submit" value="Импортиране" name="import"/>
+            <form class="form-inline" action="" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>"/>
+                <input class="button is-link green-btn float-left" type="submit" value="Примерен Файл" name="download">
+            </form>
         </form>
+
     </section>
 
     <script>

@@ -20,7 +20,7 @@ ul li:before {
 
 .list li a {
     text-decoration: none;
-    color: #485fc7;
+    color: var(--button-blue);
 }
 
 .list li a:hover {

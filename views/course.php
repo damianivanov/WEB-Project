@@ -1,5 +1,7 @@
 <?php
-//TODO: links/2-3 reda testovi danni/documentation/url parameter filter
+//TODO: links/documentation/url parameter filter
+
+
 $courseID = Router::$ROUTE['URL_PARAMS']['id'];
 $data = Course::getById($courseID);
 $teacher_id = $data['teacher_id'];
@@ -92,7 +94,7 @@ if (isset($_POST['export'])) {
         //$dates = TimeTable::getDates($courseID);
         foreach ($date_times_copy as $datum) {
             ?>
-            <option value="<?= $datum['date'] ?>"><?= $datum['date'] ?></option>
+                <option value="<?= $datum['date'] ?>"><?= $datum['date'] ?></option>
             <?php
         }
         ?>
