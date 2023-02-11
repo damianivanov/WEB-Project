@@ -72,29 +72,74 @@ class Router {
         require_once APP_ROOT . "templates/main.php";
     }
 
+    //if something fails - 99.9% it will be from this function
     private function match($route, $subject): bool {
-        preg_match_all("#/:([^/]+)/?#", $route, $output);
+        if($route==$subject) return true;
+        preg_match_all("#:([^/]+)#", $route, $output);
+        //preg_match_all("#/\:[a-zA-Z]*#", $route, $output);
         $parameter_names = $output[1];
+        preg_match("#(\d*)\/(\d{4}-\d{2}-\d{2})|(\d+)(?=\/)|(\d*)$#",$subject,$values);
+        $values = array_filter(explode('/',$values[0]));
+        if(count($values) != count($parameter_names) || count($parameter_names)==0){
+            return false;
+        }
 
-        $search_pattern = "#^". preg_replace("#/:[^/]+(/?)#", "/([^/]+)$1", $route) . "/?$#";
-        preg_match_all($search_pattern, $subject, $out);
-
+    if(count($parameter_names) == 1)
+    {
+        $search_pattern = "#^". preg_replace("#:[^/]+(/?)#", "([^/]+)$1", $route) . "/?$#";
+        if(preg_match($search_pattern,$subject)){
+            $result = [];
+            $result[$parameter_names[0]] = $values[0];
+            Router::$ROUTE['URL_PARAMS'] = $result;
+            return true;
+        }
+        return false;
+    }
+//        preg_match_all($search_pattern, $subject, $out);
 //        var_dump($out);
+
         $result = [];
-        $i = 1;
+        $i = 0;
         foreach ($parameter_names as $name) {
             // TODO: Fix undefined $out[$i][0]
             //if (isset($out[$i][0]) && count($out[$i][0]) != 0) {
-            if(isset($out[$i][0])){
-                $result[$name] = $out[$i][0];
-        }
-        }
+//            if(isset($out[$i][0])){
+//                $result[$name] = $out[$i][0];
+//        }
+        $result[$name] = $values[$i];
             ++$i;
-       // }
+       }
 //        var_dump($result);
 
         Router::$ROUTE['URL_PARAMS'] = $result;
 
-        return preg_match($search_pattern, $subject);
+        return count($result) > 0;
     }
+
+
+//    private function match($route, $subject): bool {
+//        preg_match_all("#/:([^/]+)/?#", $route, $output);
+//        $parameter_names = $output[1];
+//
+//        $search_pattern = "#^". preg_replace("#/:[^/]+(/?)#", "/([^/]+)$1", $route) . "/?$#";
+//        preg_match_all($search_pattern, $subject, $out);
+//
+////        var_dump($out);
+//        $result = [];
+//        $i = 1;
+//        foreach ($parameter_names as $name) {
+//            // TODO: Fix undefined $out[$i][0]
+//            //if (isset($out[$i][0]) && count($out[$i][0]) != 0) {
+//            if(isset($out[$i][0])){
+//                $result[$name] = $out[$i][0];
+//            }
+//        }
+//        ++$i;
+//        // }
+////        var_dump($result);
+//
+//        Router::$ROUTE['URL_PARAMS'] = $result;
+//
+//        return preg_match($search_pattern, $subject);
+//    }
 }

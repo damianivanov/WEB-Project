@@ -17,6 +17,7 @@
 
 table {
     width: 100%;
+
 }
 
 table, tr, td {
@@ -47,6 +48,10 @@ tr, td {
 .m {
     border-top: 3px solid black;
     border-bottom: 3px solid black;
+}
+
+.links{
+    margin-left: 2px;
 }
 
 .header {

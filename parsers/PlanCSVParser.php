@@ -211,4 +211,22 @@ class PlanCSVParser {
 
         (new DB())->multipleExecute($sql, $values);
     }
+
+    public static function loadSocials():array{
+        $filename='../parsers/socials.txt';
+        $fp = @fopen($filename, 'r');
+        if ($fp) {
+            $result=[];
+            $array = explode("\n", fread($fp, filesize($filename)));
+            $i=0;
+            foreach ($array as $line) {
+                $tokens = explode(" = ",$line);
+                if($tokens[0]=="") continue;
+                $result[$i] = [$tokens[0],$tokens[1]];
+                $i++;
+            }
+            return  array_filter($result);
+        }
+        return [];
+    }
 }

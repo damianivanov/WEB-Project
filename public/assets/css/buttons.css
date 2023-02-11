@@ -16,6 +16,20 @@
     vertical-align: top;
 }
 
+.small-button{
+    background-color: var(--small-button);
+    border-color: #dbdbdb;
+    border-width: 1px;
+    color: #363636;
+    cursor: pointer;
+    border-radius: 3px;
+    justify-content: center;
+    text-decoration: none;
+    padding: 0 5px; /*calc(.5em - 1px)*/
+    text-align: center;
+    white-space: nowrap;
+    color: white;
+}
 .button {
     background-color: #fff;
     border-color: #dbdbdb;

@@ -1,13 +1,14 @@
 <?php
-//TODO: links/documentation/url parameter filter
+//TODO: /documentation
 
 
 $courseID = Router::$ROUTE['URL_PARAMS']['id'];
+$filteredDate = Router::$ROUTE['URL_PARAMS']['date'] ?? "";
 $data = Course::getById($courseID);
 $teacher_id = $data['teacher_id'];
 $teacher = Course::getTeachersInfoForCourse($teacher_id)[0];
 $timeTableData = TimeTable::getAllByCourseId($courseID);
-
+$socials = PlanCSVParser::loadSocials();
 $data1 = Presence::getPresencesByCourseID($courseID);
 
 $result = [];
@@ -21,8 +22,13 @@ $date_times = $date_times_copy;
 $presence_today = [];
 $presenters_today = [];
 $filtered = false;
-if (isset($_POST['filter'])) {
-    $filterDate = $_POST['date'];
+if (isset($_POST['removeFilter'])) {
+    $filtered = false;
+    unset(Router::$ROUTE['URL_PARAMS']['date']);
+    $filteredDate = "";
+}
+if ($filteredDate != "" || isset($_POST['filter'])) {
+    $filterDate = $_POST['date'] ?? $filteredDate;
     foreach ($date_times_copy as $date) {
         if ($date['date'] == $filterDate) {
             $date_times = [];
@@ -35,9 +41,6 @@ if (isset($_POST['filter'])) {
     }
 
     $filtered = true;
-}
-if (isset($_POST['removeFilter'])) {
-    $filtered = false;
 }
 if (isset($_POST['export'])) {
     $fp = fopen("php://output", 'w');
@@ -152,8 +155,16 @@ if (isset($_POST['export'])) {
                     ?>
                     <tr>
                         <td class="header" title="<?= $student['name'] ?>">
-                            <div class="hide-long-text">
-                        <span><?= $student['name'] ?></span>
+                            <div >
+                                <span><?= $student['name'];?>
+                                <span class="links"><?php if(!empty($socials)){
+                                foreach ($socials as $social){
+                            ?><a href="<?=$social[1].''.$student['faculty_number']?>" target="_blank" class="small-button"><?=strtoupper($social[0][0])?></i></a>
+                                    <?php
+                                }
+                            }?>
+                        </span>
+                                </span>
                             </div>
                         </td>
                         <td class="header1"><?= $student['faculty_number'] ?></td>

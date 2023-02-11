@@ -1,4 +1,5 @@
 [
+
     {
         "path": "/",
         "view": "welcome",
@@ -98,6 +99,17 @@
             "title": "Import real plan from Google Sheets",
             "css": [
                 "/assets/css/import-real.css"
+            ]
+        }
+    },
+    {
+        "path": "/course/:id/:date",
+        "view": "course",
+        "meta": {
+            "auth": "required",
+            "title": "View Course",
+            "css": [
+                "/assets/css/course.css"
             ]
         }
     },

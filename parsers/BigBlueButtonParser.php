@@ -2,7 +2,7 @@
 //TRICKY REGEX--Fixed
 class BigBlueButtonParser {
     private const REGEX = [
-        "time-stamp" => "/([1-9]|1[0-2])\/([1-9]|1[0-9]|2[0-9]|3[0|1])\/(\d{4}):(0[0-9]|1[0-2]):([0-5]?[0-9]):([0-5]?[0-9]) (AM|PM)/",
+        "time-stamp" => "/([1-9]|1[0-2])\/([1-9]|1[0-9]|2[0-9]|3[0|1])\/(\d{4}):([0-9]|0[0-9]|1[0-2]):([0-5]?[0-9]):([0-5]?[0-9]) (AM|PM)/",
         "student-list" => "/Sorted by first name:\r\n(([^\r]|\r)*)\n  \r\n\r\nSorted by last name:/",
     ];
 
@@ -28,7 +28,8 @@ class BigBlueButtonParser {
         $hour = $matches[4][0];
         $minute = $matches[5][0];
         $second = $matches[6][0];
-
+        $format = $matches[7][0];
+        if($format=="PM"){$hour = strval((int) $hour +12);}
         $string = $year . "-" . $month . "-" . $day . " " . $hour . ":" . $minute . ":" . $second;
         //throw "Error";
         return $string;
