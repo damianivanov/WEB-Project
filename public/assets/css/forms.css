@@ -18,15 +18,16 @@ form label {
 form {
     padding-top: 20px;
     margin: auto;
-    width: 50%;
+    width: 70%;
 }
 
 .textarea {
     display: block;
     max-width: 100%;
-    min-width: 100%;
+    min-width: 70%;
     padding: calc(.75em - 1px);
     resize: vertical;
+    resize: horizontal;
 }
 
 

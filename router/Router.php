@@ -113,7 +113,8 @@ class Router {
 
         Router::$ROUTE['URL_PARAMS'] = $result;
 
-        return count($result) > 0;
+        $search_pattern = "#^". preg_replace("#:[^/]+(/?)#", "([^/]+)$1", $route) . "#";
+        return preg_match($search_pattern,$subject);
     }
 
 

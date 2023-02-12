@@ -1,7 +1,9 @@
 <?php
-$initialRealData = "0	09:00	09:05	9999	0	Милен Петров	0	Откриване на презентациите
+$initialRealData = "id	Старт	Край	фн  Група	Име Фамилия	Тема номер	Тема
+1	2	3	4	5   6   7   8   9
+0	09:00	09:05	9999	0	Милен Петров	0	Откриване на презентациите
 2	09:20	09:25	82057	3	Дамян Иванов	10	Работа със сесии и cookies (от страна насървъра и клиента).";
-$initialConfiguration='{"field_delimiter":"\t", "line_delimiter":"\n", "skip_header_rows":"0", "validate":"true"}';
+$initialConfiguration='{"field_delimiter":"\t", "line_delimiter":"\n", "skip_header_rows":"2", "validate":"true"}';
 ?>
 <section class="mini-container data-section">
     <h1>

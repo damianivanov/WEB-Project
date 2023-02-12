@@ -38,16 +38,16 @@ tr, td {
 }
 
 .e {
-    border-right: 3px solid black;
+    border-right: var(--cell-border);
 }
 
 .s {
-    border-left: 3px solid black;
+    border-left: var(--cell-border);
 }
 
 .m {
-    border-top: 3px solid black;
-    border-bottom: 3px solid black;
+    border-top: var(--cell-border);
+    border-bottom: var(--cell-border);
 }
 
 .links{
@@ -55,21 +55,21 @@ tr, td {
 }
 
 .header {
-    left: 1px;
+    /*left: 1px;*/
     position: sticky;
     background-color: #f1f1f1;
     /*width: 300px;*/
 }
 
 .header1 {
-    left: 206px;
+    /*left: 206px;*/
     position: sticky;
     background-color: #d0d0d0;
     border: 1px solid black;
 }
 
 .header2 {
-    left: 257px;
+    /*left: 257px;*/
     position: sticky;
     background-color: #f1f1f1;
     /*border-right: 1px solid black;*/

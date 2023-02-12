@@ -1,7 +1,7 @@
 <?php
 //TRICKY REGEX--Fixed
 class BigBlueButtonParser {
-    private const REGEX = [
+    public const REGEX = [
         "time-stamp" => "/([1-9]|1[0-2])\/([1-9]|1[0-9]|2[0-9]|3[0|1])\/(\d{4}):([0-9]|0[0-9]|1[0-2]):([0-5]?[0-9]):([0-5]?[0-9]) (AM|PM)/",
         "student-list" => "/Sorted by first name:\r\n(([^\r]|\r)*)\n  \r\n\r\nSorted by last name:/",
     ];
@@ -46,9 +46,12 @@ class BigBlueButtonParser {
         return $matches;
     }
 
-    public static function getStudentList(string $fileContent): array {
-        $match = BigBlueButtonParser::find($fileContent, BigBlueButtonParser::REGEX['student-list']);
+    public static function getStudentList(string $fileContent,$configuration): array {
+        $config = json_decode($configuration);
+        $delimiter = $config->delimiter;
+        $regex = "/Sorted by first name:{$delimiter}(([^\r]|\r)*){$delimiter}  {$delimiter}{$delimiter}Sorted by last name:/";
+        $match = BigBlueButtonParser::find($fileContent,$regex);
 
-        return explode("\r\n", $match[1][0]);
+        return explode($delimiter, $match[1][0]);
     }
 }

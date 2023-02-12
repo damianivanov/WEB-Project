@@ -1,14 +1,18 @@
+<script>
+    document.querySelector(".nav").remove();
+</script>
+<style>
+    <?php include '../public/assets/css/styles.css'; ?>
+    <?php include '../public/assets/css/nav.css'; ?>
+</style
 <?php
-//TODO: /documentation
 
 
 $courseID = Router::$ROUTE['URL_PARAMS']['id'];
 $filteredDate = Router::$ROUTE['URL_PARAMS']['date'] ?? "";
 $data = Course::getById($courseID);
 $teacher_id = $data['teacher_id'];
-$teacher = Course::getTeachersInfoForCourse($teacher_id)[0];
 $timeTableData = TimeTable::getAllByCourseId($courseID);
-$socials = PlanCSVParser::loadSocials();
 $data1 = Presence::getPresencesByCourseID($courseID);
 
 $result = [];
@@ -22,11 +26,6 @@ $date_times = $date_times_copy;
 $presence_today = [];
 $presenters_today = [];
 $filtered = false;
-if (isset($_POST['removeFilter'])) {
-    $filtered = false;
-    unset(Router::$ROUTE['URL_PARAMS']['date']);
-    $filteredDate = "";
-}
 if ($filteredDate != "" || isset($_POST['filter'])) {
     $filterDate = $_POST['date'] ?? $filteredDate;
     foreach ($date_times_copy as $date) {
@@ -41,83 +40,11 @@ if ($filteredDate != "" || isset($_POST['filter'])) {
     }
 
     $filtered = true;
-}
-if (isset($_POST['export'])) {
-    $fp = fopen("php://output", 'w');
-    $header_args = array("Тема", 'Име', "Фак.Номер", "Планирано започване", 'Планиран край', 'Реално започване', 'Реален край', 'Продължителност');
-    $filteredDate = $_POST['filteredDate'];
-    if ($filteredDate == "") {
-        $filename = $data['name'] . '-' . $data['year'] . '.csv';
-    } else {
-        $filename = $filteredDate . '-' . $data['name'] . '-' . $data['year'] . '.csv';
-    }
-
-    header("Content-type: text/csv; charset=utf-8");
-    header("Content-Disposition: attachment; filename=$filename");
-    ob_end_clean();
-    fputcsv($fp, $header_args);
-    if ($filteredDate == "") {
-        foreach ($date_times as $date_time) {
-            fputcsv($fp, [$date_time['date']]);
-            $filteredStudents = Course::getAllInfo($courseID, $date_time['date']);
-            foreach ($filteredStudents as $student) {
-                fputcsv($fp, $student);
-            }
-        }
-    } else {
-        $filteredStudents = Course::getAllInfo($courseID, $filteredDate);
-        foreach ($filteredStudents as $student) {
-            fputcsv($fp, $student);
-        }
-    }
-    exit;
-}
-if(isset($_POST['exportHTML'])){
-    if($_POST['filteredDate']!="") {
-        header("Location: /course/" . Router::$ROUTE['URL_PARAMS']['id'] . "/" . $_POST['filteredDate'] . "/html");
-    }
-else{
-    header("Location: /course/" . Router::$ROUTE['URL_PARAMS']['id'] . "/" . $_POST['date'] . "/html");
-}
-}
-?>
-
-<section class="mini-container data-section">
-    <div id="courses">
-        <h1>
-            <a class="icon-back is-link" href="/dashboard"><i class="fa-solid fa-chevron-left"></i></a>
-            <?= $data['name'] ?> - <?= $data['year'] ?>, Преподавател: <?= $teacher['name'] ?>
-        </h1>
-
-        <a class="button is-link" href="/course/<?= $courseID ?>/import-plan">Предварителен график</a>
-        <?php if (count($timeTableData) != 0) { ?>
-            <a class="button is-link" href="/course/<?= $courseID ?>/import-real">Реален график</a>
-            <a class="button is-link" href="/course/<?= $courseID ?>/import-bbb">Присъствен списък от BBB</a>
-            <a class="button is-link" href="/course/<?= $courseID ?>/presence-list">Списък на присъствията</a>
-        <?php } ?>
-    </div>
-</section>
-
-<form action="" class="form-inline" method="post" enctype="multipart/form-data">
-    <select class="select is-link" name="date" id="dates">
-        <?php
-        //$dates = TimeTable::getDates($courseID);
-        foreach ($date_times_copy as $datum) {
-            ?>
-                <option value="<?= $datum['date'] ?>"><?= $datum['date'] ?></option>
+}?>
+<div class="container">
+        <div class="grid">
             <?php
-        }
-        ?>
-    </select>
-    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>"/>
-    <input class="button is-link" type="submit" value="Филтриране" name="filter"/>
-    <input class="button is-link red-btn" type="submit" value="Изчистване на Филтър" name="removeFilter"/>
-    <input type="hidden" name="filteredDate" value="<?= $filterDate ?? "" ?>"/>
-    <input class="button is-link green-btn" type="submit" name="export" value="Експорт"/>
-    <input class="button is-link green-btn" type="submit" name="exportHTML" value="HTML"/>
-</form>
-
-<?php if (count($timeTableData) != 0) {
+if (count($timeTableData) != 0) {
     $start = hrtime(true); ?>
     <div class="table">
         <table>
@@ -213,10 +140,15 @@ else{
 //$s = ($end - $start) / 1000000000;
 //print_r($s);
 } else { ?>
+
     <section class="mini-container">
         <p class="text-center">Все още няма информация за студентите в курса. Моля, първо качете предварителния график
             за представянето.</p>
     </section>
+    </div>
+    </div>
 <?php }
 ?>
+
+
 

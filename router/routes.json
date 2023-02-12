@@ -102,6 +102,18 @@
             ]
         }
     },
+
+    {
+        "path": "/course/:id/:date/html",
+        "view": "courseHTML",
+        "meta": {
+            "auth": "required",
+            "title": "View Course",
+            "css": [
+                "/assets/css/course.css"
+            ]
+        }
+    },
     {
         "path": "/course/:id/:date",
         "view": "course",

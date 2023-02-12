@@ -88,7 +88,7 @@ class PlanCSVParser {
                 $result[] =  [
                     "faculty_number" => $temp_row[3],
                     "name" => $temp_row[5],
-                    "topic" => rtrim($temp_row[7],"\r\n\r\n"),
+                    "topic" => rtrim($temp_row[7],$this->lineDelimiter),
                     "start" => $temp_row[1],
                     "end" => $temp_row[2],
                 ];

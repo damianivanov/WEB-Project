@@ -1,6 +1,6 @@
 <?php
 $courseID = Router::$ROUTE['URL_PARAMS']['id'];
-
+$configuration = '{"delimiter":"\n"}';
 if (isset($_POST["importDup"])) {
     foreach ($_POST as $key => $item) {
         if (!str_contains($key, 'student-') && empty($item)) {
@@ -49,7 +49,7 @@ if(isset($_POST['download'])){
         </h1>
 
         <form action="import-bbb" method="post" enctype="multipart/form-data">
-
+        <textarea class="textarea is-link" name="configuration"><?= $configuration ?></textarea>
             <div id="file-js-example" class="file has-name">
                 <label class="file-label">
                     <input class="file-input" type="file" name="presence_list">
@@ -81,8 +81,9 @@ if(isset($_POST['download'])){
                 <input class="button is-link green-btn float-left" type="submit" value="Примерен Файл" name="download">
             </form>
         </form>
-
     </section>
+
+
 
     <script>
         const fileInput = document.querySelector('#file-js-example input[type=file]');
@@ -96,6 +97,7 @@ if(isset($_POST['download'])){
 
 <?php
 if (isset($_POST["import"])) {
+    $configuration=$_POST['configuration'];
     if (!file_exists($_FILES['presence_list']['tmp_name']) || !is_uploaded_file($_FILES['presence_list']['tmp_name'])) {
         throw new IncompleteFormError();
     }
@@ -109,7 +111,7 @@ if (isset($_POST["import"])) {
     }
 
     //bbb-list.txt BIG PROBLEMS
-    $students = BigBlueButtonParser::getStudentList($fileContent);
+    $students = BigBlueButtonParser::getStudentList($fileContent,$configuration);
     // -----------------------------------------------
     $studentNameCounter = [];
     foreach ($students as $student) {
