@@ -1,12 +1,15 @@
-1) bbb-import regex има delimiter като конфигурация. - Done
-2) стилът на border-а на графиците е изнесен в променлива в nav.css - Done
-3) нов route /course/1/2023-02-06/html - подходящ за директно запазване - Done
-4) sql_JSON_ARRAYAGG.script файл - Done
-5) смяна на примерните данни във формата на import-plan, import-real (skiping-header:2) - Done
-
 //13.02
 1) delete на курс
 2) изместване на глобален default-ен раделител и дължина на презентациите
 3) проблем с визуализирането на реален график - Fixed (от разминаването в името на темата(line delimiter problems))
 4) валидиране на "social" линк / проверка и за празен списък
 5) Изглед за HTML експорт на цялата таблица без филтри
+
+//12.02
+1) bbb-import regex има delimiter като конфигурация. - Done
+2) стилът на border-а на графиците е изнесен в променлива в nav.css - Done
+3) нов route /course/1/2023-02-06/html - подходящ за директно запазване - Done
+4) sql_JSON_ARRAYAGG.script файл - Done
+5) смяна на примерните данни във формата на import-plan, import-real (skiping-header:2) - Done
+
+
