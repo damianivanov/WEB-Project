@@ -84,4 +84,46 @@ where scp.course_id = (?) and DATE(t.from_time_planned) = (?)";
         return (new DB())->execute($sql, [$courseID, $date]);
 
     }
+
+    public  static function deleteCourseById($courseID){
+        $sqlStudentCoursePivot="select * from students_courses_pivot where course_id=(?)";
+        $studentCoursePivotIds= (new DB())->execute($sqlStudentCoursePivot, [$courseID]);
+        $SCPids=[];
+        $StudentsIds=[];
+        foreach ($studentCoursePivotIds as $item){
+            $SCPids[]=$item['id'];
+            $StudentsIds[]=$item['student_id'];
+        }
+        if(count($SCPids)!=0) {
+            $sqlDeletePresences = "delete from presences where student_course_pivot_id in " . DB::getQuestionLine(count($SCPids));
+            (new DB())->execute($sqlDeletePresences, $SCPids);
+
+            $sqlPaperIds = "select id from papers where student_course_pivot_id in " . DB::getQuestionLine(count($SCPids));
+            $result = (new DB())->execute($sqlPaperIds, $SCPids);
+
+            $paper_ids = [];
+            foreach ($result as $paper_id) {
+                $paper_ids[] = $paper_id['id'];
+            }
+
+            if(count($paper_ids) != 0) {
+                $sqlDeleteTimeTable = "delete from time_tables where paper_id in" . DB::getQuestionLine(count($paper_ids));
+                (new DB())->execute($sqlDeleteTimeTable, $paper_ids);
+
+
+                $sqlDeletePapers = "delete from papers where student_course_pivot_id in " . DB::getQuestionLine(count($paper_ids));
+                (new DB())->execute($sqlDeletePapers, $paper_ids);
+            }
+
+            $sqlDeleteStudentCoursePivot = "delete from students_courses_pivot where course_id=(?)";
+            (new DB())->execute($sqlDeleteStudentCoursePivot, [$courseID]);
+
+            $sqlDeleteStudentsInCourse = "delete from students where id in" . DB::getQuestionLine(count($StudentsIds));
+            (new DB())->execute($sqlDeleteStudentsInCourse, $StudentsIds);
+        }
+
+        $sqlDeleteCourse = "delete from courses where id = (?)";
+        (new DB())->execute($sqlDeleteCourse, [$courseID]);
+
+    }
 }

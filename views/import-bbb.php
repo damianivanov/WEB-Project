@@ -1,6 +1,6 @@
 <?php
 $courseID = Router::$ROUTE['URL_PARAMS']['id'];
-$configuration = '{"delimiter":"\n"}';
+$configuration = '{"delimiter":"'.$_ENV["DELIMITER"].'"}';
 if (isset($_POST["importDup"])) {
     foreach ($_POST as $key => $item) {
         if (!str_contains($key, 'student-') && empty($item)) {

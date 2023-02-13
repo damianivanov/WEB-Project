@@ -1,9 +1,9 @@
 <?php
-$initialRealData = "id	Старт	Край	фн  Група	Име Фамилия	Тема номер	Тема
-1	2	3	4	5   6   7   8   9
-0	09:00	09:05	9999	0	Милен Петров	0	Откриване на презентациите
-2	09:20	09:25	82057	3	Дамян Иванов	10	Работа със сесии и cookies (от страна насървъра и клиента).";
-$initialConfiguration='{"field_delimiter":"\t", "line_delimiter":"\n", "skip_header_rows":"2", "validate":"true"}';
+$initialRealData = "id	Старт	Край	фн	Група	Име Фамилия	Тема номер	Тема
+1	2	3	4	5	6	7	8
+0	9:00	9:05	9999	0	Милен Петров	0	Откриване на презентациите
+2	9:20	9:25	82057	3	Дамян Иванов	10	Работа със сесии и cookies (от страна насървъра и клиента).";
+$initialConfiguration='{"field_delimiter":"\t", "line_delimiter":"'.$_ENV["DELIMITER"].'", "skip_header_rows":"2", "validate":"true"}';
 ?>
 <section class="mini-container data-section">
     <h1>
@@ -47,9 +47,9 @@ if (isset($_POST["import"])) {
 
     if (!empty($_POST['configuration'])) {
         $config = json_decode($_POST['configuration']);
-        $parser = new PlanCSVParser($config->field_delimiter, $config->line_delimiter, $config->skip_header_rows, $config->validate);
+        $parser = new PlanCSVParser($config->field_delimiter, $config->line_delimiter, $config->skip_header_rows, $config->validate,5);
     } else {
-        $parser = new PlanCSVParser("\t", "\n", '0', 'true');
+        $parser = new PlanCSVParser("\t", $_ENV["DELIMITER"], '0', 'true',5);
     }
 
     $plan = $_POST['plan'];

@@ -16,13 +16,14 @@
         ?>
         <ul class="list">
             <?php
-            foreach ($courses as $course) {
-                echo "<li><a class=\"is-link\" href=\"course/" . $course['id'] . "\">" . $course["name"] . ", " . $course["year"] . "</a></li>";
+            foreach ($courses as $course) {?>
+                <li><a class="is-link" href=\course\<?=$course['id']?>>  <?=$course["name"]?>, <?=$course["year"]?> </a>
+                    <a class="is-link margin" href=\course\<?=$course['id']?>\delete><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </li>
+            <?php
             }
             ?>
         </ul>
     </div>
 </section>
-
-
 

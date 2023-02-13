@@ -1,2 +1,3 @@
 puffin = http://w19ref.w3c.fmi.uni-sofia.bg/referat/
 moodle = https://learn.fmi.uni-sofia.bg/user/
+facebook = dfs://nevalidenlink/sdf

@@ -5,12 +5,14 @@ class PlanCSVParser {
     private string $lineDelimiter;
     private string $skipHeader;
     private string $validation;
+    private int $length;
 
-    public function __construct(string $fieldDelimiter, string $lineDelimiter, string $skipHeader, bool $validation) {
+    public function __construct(string $fieldDelimiter, string $lineDelimiter, string $skipHeader, bool $validation,int $presentationLength) {
         $this->fieldDelimiter = $fieldDelimiter;
         $this->lineDelimiter = $lineDelimiter;
         $this->skipHeader = $skipHeader;
         $this->validation = $validation;
+        $this->length = $presentationLength;
     }
 
     public  function fileValidation(array $file): string {
@@ -63,7 +65,7 @@ class PlanCSVParser {
                     "name" => $temp_row[4],
                     "topic" => $temp_row[6],
                     "start" => $temp_row[1],
-                    "end" => TimeTable::addTime($temp_row[1], 5)
+                    "end" => TimeTable::addTime($temp_row[1], $this->length)
                 ];
             }
         }
@@ -88,7 +90,7 @@ class PlanCSVParser {
                 $result[] =  [
                     "faculty_number" => $temp_row[3],
                     "name" => $temp_row[5],
-                    "topic" => rtrim($temp_row[7],$this->lineDelimiter),
+                    "topic" => rtrim($temp_row[7],"\r\n"),
                     "start" => $temp_row[1],
                     "end" => $temp_row[2],
                 ];
@@ -118,11 +120,11 @@ class PlanCSVParser {
             $fns[] = $registeredFN['faculty_number'];
         }
 
-        foreach ($result as $student) {
-            if (TimeTable::searchByValue($student['faculty_number'], $fns)) {
-                throw new DuplicateStudentError($student['faculty_number']);
-            }
-        }
+//        foreach ($result as $student) {
+//            if (TimeTable::searchByValue($student['faculty_number'], $fns)) {
+//                throw new DuplicateStudentError($student['faculty_number']);
+//            }
+//        }
 
         $firstId = Student::StoreList($result);
 
@@ -215,6 +217,16 @@ class PlanCSVParser {
     public static function loadSocials():array{
         $filename='../parsers/socials.txt';
         $fp = @fopen($filename, 'r');
+
+        $regex = "((https?|ftp)\:\/\/)?";
+        $regex .= "([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?";
+        $regex .= "([a-z0-9-.]*)\.([a-z]{2,3})";
+        $regex .= "(\:[0-9]{2,5})?";
+        $regex .= "(\/([a-z0-9+\$_-]\.?)+)*\/?";
+        $regex .= "(\?[a-z+&\$_.-][a-z0-9;:@&%=+\/\$_.-]*)?";
+        $regex .= "(#[a-z_.-][a-z0-9+\$_.-]*)?";
+
+        if(filesize($filename)==0){return [];}
         if ($fp) {
             $result=[];
             $array = explode("\n", fread($fp, filesize($filename)));
@@ -222,8 +234,11 @@ class PlanCSVParser {
             foreach ($array as $line) {
                 $tokens = explode(" = ",$line);
                 if($tokens[0]=="") continue;
-                $result[$i] = [$tokens[0],$tokens[1]];
-                $i++;
+
+                if (preg_match("/^$regex$/i", $tokens[1])) {
+                    $result[$i] = [$tokens[0],$tokens[1]];
+                    $i++;
+                }
             }
             return  array_filter($result);
         }

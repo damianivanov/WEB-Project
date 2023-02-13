@@ -1,6 +1,28 @@
 [
 
     {
+        "path": "/course/:id/delete",
+        "view": "deleteCourse",
+        "meta": {
+            "auth": "required",
+            "title": "Delete Course",
+            "css": [
+                "/assets/css/course.css"
+            ]
+        }
+    },
+    {
+        "path": "/course/:id/html",
+        "view": "courseHTML",
+        "meta": {
+            "auth": "required",
+            "title": "Delete Course",
+            "css": [
+                "/assets/css/course.css"
+            ]
+        }
+    },
+    {
         "path": "/",
         "view": "welcome",
         "meta": {
