@@ -49,7 +49,7 @@ class User {
 
     private function verifyPasswordPattern(string $password) {
         // atleast 6 symbols, 1 letter, numbers
-        $regex = "/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/";
+        $regex = "/^(?=.*?[a-zA-Z])(?=.*?[0-9]).{6,32}$/";
 
         if (!preg_match($regex, $password)) {
             throw new InvalidPasswordError();

@@ -58,7 +58,7 @@ class Router {
             }
         }
 
-        if (isset(Router::$ROUTE['URL_PARAMS']['id']) && !Course::doesCourseBelongToUser(Router::$ROUTE['URL_PARAMS']['id'])) {
+        if (isset(Router::$ROUTE['URL_PARAMS']['id']) && !strpos($route->path,"/public") && !Course::doesCourseBelongToUser(Router::$ROUTE['URL_PARAMS']['id']) ) {
             header("Location: /invalid-course");
             return;
         }
@@ -72,6 +72,9 @@ class Router {
         require_once APP_ROOT . "templates/main.php";
     }
 
+    private function PublicRoute($route):bool{
+
+    }
     //if something fails - 99.9% it will be from this function
     private function match($route, $subject): bool {
         if($route==$subject) return true;

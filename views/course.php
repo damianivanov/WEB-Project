@@ -74,10 +74,10 @@ if (isset($_POST['export'])) {
 }
 if(isset($_POST['exportHTML'])){
     if($_POST['filteredDate']!="") {
-        header("Location: /course/" . Router::$ROUTE['URL_PARAMS']['id'] . "/" . $_POST['filteredDate'] . "/html");
+        header("Location: /course/" . Router::$ROUTE['URL_PARAMS']['id'] . "/" . $_POST['filteredDate'] . "/html/public");
     }
 else{
-    header("Location: /course/" . Router::$ROUTE['URL_PARAMS']['id'] . "/" . $_POST['date'] . "/html");
+    header("Location: /course/" . Router::$ROUTE['URL_PARAMS']['id'] . "/html/public");
 }
 }
 ?>

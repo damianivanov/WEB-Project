@@ -1,7 +1,7 @@
 <?php
 $courseID = Router::$ROUTE['URL_PARAMS']['id'];
 $list = Presence::getPresenceList($courseID);
-$presencesRequired = 2;
+$presencesRequired = $_ENV['PRESENCESREQUIRED'];
 if (isset($_POST['filterButton'])) {
     $presencesRequired = $_POST['presences'];
     $students = array_filter($list, function ($student) use ($presencesRequired) {

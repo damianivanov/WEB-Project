@@ -19,6 +19,7 @@
             foreach ($courses as $course) {?>
                 <li><a class="is-link" href=\course\<?=$course['id']?>>  <?=$course["name"]?>, <?=$course["year"]?> </a>
                     <a class="is-link margin" href=\course\<?=$course['id']?>\delete><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a class="is-link" href=\course\<?=$course['id']?>\html\public><i class="fas fa-share"></i></a>
                 </li>
             <?php
             }

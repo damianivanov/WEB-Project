@@ -12,11 +12,10 @@
         }
     },
     {
-        "path": "/course/:id/html",
+        "path": "/course/:id/html/public",
         "view": "courseHTML",
         "meta": {
-            "auth": "required",
-            "title": "Delete Course",
+            "title": "Public Course",
             "css": [
                 "/assets/css/course.css"
             ]
@@ -126,11 +125,10 @@
     },
 
     {
-        "path": "/course/:id/:date/html",
+        "path": "/course/:id/:date/html/public",
         "view": "courseHTML",
         "meta": {
-            "auth": "required",
-            "title": "View Course",
+            "title": "Course HTML",
             "css": [
                 "/assets/css/course.css"
             ]

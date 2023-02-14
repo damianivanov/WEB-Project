@@ -3,7 +3,7 @@ $initialRealData = "id	Час	фн	Група	Име Фамилия	Тема н�
 1	2	3	4	5	6   7   8
 0	9:00	9999	0	Милен Петров	0	Откриване на презентациите
 1	9:15	82057	3	Дамян Иванов	10	Работа със сесии и cookies (от страна насървъра и клиента).";
-$initialConfiguration='{"field_delimiter":"\t", "line_delimiter":"'.$_ENV["DELIMITER"].'", "skip_header_rows":"2", "validate":"true","presentationLength":"5"}';
+$initialConfiguration='{"field_delimiter":"\t", "line_delimiter":"'.$_ENV["DELIMITER"].'", "skip_header_rows":"2", "validate":"true","presentationLength":"'.$_ENV['PRESENTATIONLENGTH'].'"}';
 ?>
 <section class="mini-container  data-section">
     <h1>
