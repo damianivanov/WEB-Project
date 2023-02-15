@@ -9,6 +9,7 @@
         } else {
             header("Location: /login");
         }
+        die();
         ?>
         <img class="image" src="/assets/images/" alt="image with a pen"/>
     </section>

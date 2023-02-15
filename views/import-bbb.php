@@ -28,6 +28,7 @@ if (isset($_POST["importDup"])) {
     $presence = Presence::storeList($_POST['stamp'], $scpIdsOfDupStudents);
 
     header("Location: /course/" . $courseID);
+    die();
 }
 if(isset($_POST['download'])){
     $file_url = '../test-data/bbb-sampleData.txt';
@@ -106,7 +107,7 @@ if (isset($_POST["import"])) {
 
     $stamp = BigBlueButtonParser::getTimestamp($fileContent);
 
-    if ($_POST['confirm'] != "true" && count(Presence::getByTimestamp($stamp, $courseID)) != 0) {
+    if ( isset($_POST['confirm']) && $_POST['confirm'] != "true" && count(Presence::getByTimestamp($stamp, $courseID)) != 0) {
         throw new DuplicateListError();
     }
 
@@ -197,6 +198,7 @@ if (isset($_POST["import"])) {
         <?php
     } else {
         header("Location: /course/" . $courseID);
+        die();
     }
 }
 

@@ -79,6 +79,7 @@ if(isset($_POST['exportHTML'])){
 else{
     header("Location: /course/" . Router::$ROUTE['URL_PARAMS']['id'] . "/html/public");
 }
+    die();
 }
 ?>
 
@@ -195,7 +196,7 @@ else{
                             for ($j = 0; $j < $cellCount; ++$j) {
                                 $currTime = TimeTable::addTime($start_time, $j);
                                 ?>
-                                <td class="<?= TimeTable::isPlanned($currTime, $parsedTimes[0], $parsedTimes[1], true, $date_time['date']) ?> <?= TimeTable::isPlanned($currTime, $parsedTimes[2], $parsedTimes[3], false, $date_time['date']) ?> <?= TimeTable::isMid($currTime, $parsedTimes[0], $parsedTimes[1], $parsedTimes[3], $date_time['date'], 'm') ?> <?= TimeTable::isMid($currTime, $parsedTimes[4], $parsedTimes[5], $parsedTimes[6], $date_time['date'], 'g') ?> <?= TimeTable::determinePresence($currTime, $presences, $student['student_id']) ?> <?= TimeTable::isLast($currTime, $end_time, $date_time, $date_times) ?>" title="<?= $currTime ?>"><div class="p"></div></td>
+                                <td class="<?= TimeTable::isPlanned($currTime, $parsedTimes[0], $parsedTimes[1], true, $date_time['date']) ?> <?= TimeTable::isPlanned($currTime, $parsedTimes[2], $parsedTimes[3], false, $date_time['date']) ?> <?= TimeTable::isMid($currTime, $parsedTimes[0], $parsedTimes[1], $parsedTimes[3], $date_time['date'], 'm') ?> <?= TimeTable::isMid($currTime, $parsedTimes[0], $parsedTimes[5], $parsedTimes[6], $date_time['date'], 'g') ?> <?= TimeTable::determinePresence($currTime, $presences, $student['student_id']) ?> <?= TimeTable::isLast($currTime, $end_time, $date_time, $date_times) ?>" title="<?= $currTime ?>"><div class="p"></div></td>
                                 <?php
                             }
 

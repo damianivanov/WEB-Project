@@ -72,14 +72,10 @@ class Router {
         require_once APP_ROOT . "templates/main.php";
     }
 
-    private function PublicRoute($route):bool{
-
-    }
     //if something fails - 99.9% it will be from this function
     private function match($route, $subject): bool {
         if($route==$subject) return true;
         preg_match_all("#:([^/]+)#", $route, $output);
-        //preg_match_all("#/\:[a-zA-Z]*#", $route, $output);
         $parameter_names = $output[1];
         preg_match("#(\d*)\/(\d{4}-\d{2}-\d{2})|(\d+)(?=\/)|(\d*)$#",$subject,$values);
         $values = array_filter(explode('/',$values[0]));
@@ -87,7 +83,7 @@ class Router {
             return false;
         }
 
-    if(count($parameter_names) == 1)
+        if(count($parameter_names) == 1)
     {
         $search_pattern = "#^". preg_replace("#:[^/]+(/?)#", "([^/]+)$1", $route) . "/?$#";
         if(preg_match($search_pattern,$subject)){
@@ -98,24 +94,13 @@ class Router {
         }
         return false;
     }
-//        preg_match_all($search_pattern, $subject, $out);
-//        var_dump($out);
-
         $result = [];
         $i = 0;
         foreach ($parameter_names as $name) {
-            // TODO: Fix undefined $out[$i][0]
-            //if (isset($out[$i][0]) && count($out[$i][0]) != 0) {
-//            if(isset($out[$i][0])){
-//                $result[$name] = $out[$i][0];
-//        }
-        $result[$name] = $values[$i];
+            $result[$name] = $values[$i];
             ++$i;
-       }
-//        var_dump($result);
-
+        }
         Router::$ROUTE['URL_PARAMS'] = $result;
-
         $search_pattern = "#^". preg_replace("#:[^/]+(/?)#", "([^/]+)$1", $route) . "#";
         return preg_match($search_pattern,$subject);
     }

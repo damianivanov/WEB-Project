@@ -57,6 +57,7 @@ if (isset($_POST["import"])) {
     $parser->processReal($plan, $date);
 
     header("Location: /course/" . Router::$ROUTE['URL_PARAMS']['id']);
+    die();
 }
 
 ?>

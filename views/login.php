@@ -26,5 +26,6 @@ if (isset($_POST['login'])) {
     $_SESSION['expertise'] = $user['expertise'];
 
     header('Location: /dashboard');
+    die();
 }
 ?>

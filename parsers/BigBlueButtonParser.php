@@ -52,6 +52,9 @@ class BigBlueButtonParser {
         $regex = "/Sorted by first name:{$delimiter}(([^\r]|\r)*){$delimiter}  {$delimiter}{$delimiter}Sorted by last name:/";
         $match = BigBlueButtonParser::find($fileContent,$regex);
 
+        if(count($match[1])==0) {
+            throw new InvalidParsingError();
+        }
         return explode($delimiter, $match[1][0]);
     }
 }
